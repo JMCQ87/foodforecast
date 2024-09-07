@@ -11,8 +11,8 @@ migrate = Migrate(app, db)
 class Consumption(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # Time
-    year = db.Column(db.Integer)
-    week = db.Column(db.Integer)
+    year = db.Column(db.Integer, nullable=False)
+    week = db.Column(db.Integer, nullable=False)
 
     # MEALS
     meat = db.Column(db.Integer)
