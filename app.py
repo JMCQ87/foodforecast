@@ -1,16 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import pandas as pd
-import matplotlib.pyplot as plt
-from io import StringIO
-# import StringIO
-import base64
 from flask import Response
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import io
-import random
 import numpy as np
 
 app = Flask(__name__)
