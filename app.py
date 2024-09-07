@@ -31,7 +31,7 @@ class Consumption(db.Model):
     headcount = db.Column(db.Integer) # total number of employees that could have gotten a meal
     waste = db.Column(db.Integer) # the leftover trash
 
-@app.route('/train')
+@app.route('/plot')
 def plot_png():
     table = db.session.query(Consumption).all()
     ids = []
