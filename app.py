@@ -28,6 +28,10 @@ class Consumption(db.Model):
     headcount = db.Column(db.Integer) # total number of employees that could have gotten a meal
     waste = db.Column(db.Integer) # the leftover trash
 
+@app.route('/')
+def home_page():
+    return "Nothing to do here"
+
 @app.route('/gather')
 def gather_data():
     def add_data(year, w, m, veg, vegan, h, waste):
