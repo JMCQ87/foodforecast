@@ -9,6 +9,7 @@ import io
 import numpy as np
 from sklearn.metrics import r2_score
 import pickle
+from flask import request
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///canteen.db'
@@ -62,6 +63,9 @@ def plot_png():
         axis.plot(xs, ys)
         return fig
     
+    year = request.args.get('year', default = 2024, type = int)
+    food = request.args.get('food', default = 'meat', type = str)
+
     table = db.session.query(Consumption).all()
     ids = []
     years = []
@@ -93,7 +97,8 @@ def plot_png():
             "waste": wastes
         }
     )
-    fig = create_figure(df['week'], df['vegan'])
+    df = df[df['year'] == year]
+    fig = create_figure(df['week'], df[food])
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
