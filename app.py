@@ -57,9 +57,10 @@ def gather_data():
 
 @app.route('/plot')
 def plot_png():
-    def create_figure(xs, ys):
+    def create_figure(xs, ys, year, food):
         fig = Figure()
         axis = fig.add_subplot(1, 1, 1)
+        axis.set_title(f'{food} trend for {year}')
         axis.plot(xs, ys)
         return fig
     
@@ -98,7 +99,7 @@ def plot_png():
         }
     )
     df = df[df['year'] == year]
-    fig = create_figure(df['week'], df[food])
+    fig = create_figure(df['week'], df[food], year, food)
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
